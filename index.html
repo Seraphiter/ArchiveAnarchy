@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <title>PRIVATE ARCHIVE</title>
     <style>
-        body { background-color: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        body { background-color: #000; color: #fff; margin: 0; font-family: sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
         .lock-screen { text-align: center; }
         input { background: #111; border: 1px solid #333; color: #fff; padding: 10px; text-align: center; letter-spacing: 5px; outline: none; }
-        .gallery { display: none; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 50px; }
-        .gallery img { width: 300px; filter: grayscale(100%); transition: 0.5s; border: 1px solid #333; }
-        h1 { font-weight: 100; letter-spacing: 20px; }
+        
+        /* 갤러리 레이아웃 최적화 */
+        .gallery { display: none; flex-direction: column; align-items: center; padding: 50px 20px; width: 100%; }
+        .image-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
+        
+        .gallery img { 
+            width: 300px; 
+            height: auto; 
+            object-fit: contain; 
+            filter: grayscale(100%); 
+            transition: 0.5s; 
+            border: 1px solid #333; 
+        }
+        .gallery img:hover { filter: grayscale(0%); border-color: #fff; }
+        h1 { font-weight: 100; letter-spacing: 20px; margin-bottom: 50px; text-align: center; }
     </style>
 </head>
 <body>
@@ -20,7 +32,7 @@
 
     <div id="content" class="gallery">
         <h1>ARCHIVE ANARCHY</h1>
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px; width:100%;">
+        <div class="image-container">
             <img src="Eli king 𓆩♛𓆪 god of war.jpeg">
             <img src="christian allister _ the maddest obsession.jpeg">
             <img src="다운로드 (1).jpeg">
@@ -33,10 +45,11 @@
     <script>
         function check() {
             var pw = document.getElementById('pass').value;
-            // 사장, 여기에 원하는 암호를 적어라. 일단 '0000'으로 설정해뒀다.
             if(pw === '0000') {
                 document.getElementById('lock').style.display = 'none';
                 document.getElementById('content').style.display = 'flex';
+                // 암호 해제 시 스크롤 가능하도록 설정 변경
+                document.body.style.alignItems = 'flex-start';
             } else {
                 alert('ACCESS DENIED');
             }
