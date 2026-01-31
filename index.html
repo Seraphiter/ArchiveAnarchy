@@ -2,27 +2,45 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCHIVE ANARCHY</title>
+    <title>PRIVATE ARCHIVE</title>
     <style>
-        body { background-color: #050505; color: #a0a0a0; font-family: 'Pretendard', sans-serif; margin: 0; padding: 40px; }
-        h1 { text-align: center; letter-spacing: 15px; font-weight: 200; text-transform: uppercase; margin-bottom: 60px; color: #fff; font-size: 1.5rem; }
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); grid-gap: 30px; max-width: 1600px; margin: 0 auto; }
-        .gallery-item { position: relative; overflow: hidden; background: #111; border: 1px solid #1a1a1a; transition: border 0.3s ease; }
-        .gallery-item:hover { border: 1px solid #444; }
-        .gallery-item img { width: 100%; height: auto; display: block; filter: grayscale(100%); transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-        .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.02); }
+        body { background-color: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        .lock-screen { text-align: center; }
+        input { background: #111; border: 1px solid #333; color: #fff; padding: 10px; text-align: center; letter-spacing: 5px; outline: none; }
+        .gallery { display: none; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 50px; }
+        .gallery img { width: 300px; filter: grayscale(100%); transition: 0.5s; border: 1px solid #333; }
+        h1 { font-weight: 100; letter-spacing: 20px; }
     </style>
 </head>
 <body>
-    <h1>ARCHIVE ANARCHY</h1>
-    <div class="gallery">
-        <div class="gallery-item"><img src="Eli king 𓆩♛𓆪 god of war.jpeg"></div>
-        <div class="gallery-item"><img src="christian allister _ the maddest obsession.jpeg"></div>
-        <div class="gallery-item"><img src="다운로드 (1).jpeg"></div>
-        <div class="gallery-item"><img src="다운로드 (2).jpeg"></div>
-        <div class="gallery-item"><img src="다운로드 (3).jpeg"></div>
-        <div class="gallery-item"><img src="다운로드.jpeg"></div>
+    <div id="lock" class="lock-screen">
+        <h1>ENTER CODE</h1>
+        <input type="password" id="pass" onkeydown="if(event.keyCode==13) check()">
     </div>
+
+    <div id="content" class="gallery">
+        <h1>ARCHIVE ANARCHY</h1>
+        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px; width:100%;">
+            <img src="Eli king 𓆩♛𓆪 god of war.jpeg">
+            <img src="christian allister _ the maddest obsession.jpeg">
+            <img src="다운로드 (1).jpeg">
+            <img src="다운로드 (2).jpeg">
+            <img src="다운로드 (3).jpeg">
+            <img src="다운로드.jpeg">
+        </div>
+    </div>
+
+    <script>
+        function check() {
+            var pw = document.getElementById('pass').value;
+            // 사장, 여기에 원하는 암호를 적어라. 일단 '0000'으로 설정해뒀다.
+            if(pw === '0000') {
+                document.getElementById('lock').style.display = 'none';
+                document.getElementById('content').style.display = 'flex';
+            } else {
+                alert('ACCESS DENIED');
+            }
+        }
+    </script>
 </body>
 </html>
