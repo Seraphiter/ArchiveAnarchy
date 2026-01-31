@@ -4,30 +4,45 @@
     <meta charset="UTF-8">
     <title>PRIVATE ARCHIVE</title>
     <style>
+        /* 기본 배경 및 폰트 설정 */
         body { background-color: #000; color: #fff; margin: 0; font-family: sans-serif; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .lock-screen { text-align: center; }
-        input { background: #111; border: 1px solid #333; color: #fff; padding: 10px; text-align: center; letter-spacing: 5px; outline: none; }
         
-        /* 갤러리 레이아웃 최적화 */
+        /* 암호 화면 스타일 */
+        .lock-screen { text-align: center; }
+        input { background: #111; border: 1px solid #333; color: #fff; padding: 10px; text-align: center; letter-spacing: 5px; outline: none; transition: 0.3s; }
+        input:focus { border-color: #777; }
+        
+        /* 갤러리 레이아웃 - 여백 없이 꽉 차게 설정 */
         .gallery { display: none; flex-direction: column; align-items: center; padding: 50px 20px; width: 100%; }
         .image-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; }
         
+        /* 사진 스타일 - 검은 여백 제거 및 꽉 채움 */
         .gallery img { 
             width: 300px; 
-            height: auto; 
-            object-fit: contain; 
+            height: 400px; /* 모든 사진 높이 통일 */
+            object-fit: cover; /* 빈틈없이 꽉 채우기 */
             filter: grayscale(100%); 
-            transition: 0.5s; 
-            border: 1px solid #333; 
+            transition: 0.5s ease; 
+            border: 1px solid #222; 
+            cursor: pointer;
         }
-        .gallery img:hover { filter: grayscale(0%); border-color: #fff; }
+        
+        /* 마우스 올렸을 때 효과 */
+        .gallery img:hover { 
+            filter: grayscale(0%); 
+            transform: scale(1.03); 
+            border-color: #fff;
+            z-index: 5;
+        }
+
         h1 { font-weight: 100; letter-spacing: 20px; margin-bottom: 50px; text-align: center; }
     </style>
 </head>
 <body>
+
     <div id="lock" class="lock-screen">
         <h1>ENTER CODE</h1>
-        <input type="password" id="pass" onkeydown="if(event.keyCode==13) check()">
+        <input type="password" id="pass" placeholder="****" onkeydown="if(event.keyCode==13) check()">
     </div>
 
     <div id="content" class="gallery">
@@ -45,11 +60,13 @@
     <script>
         function check() {
             var pw = document.getElementById('pass').value;
+            // 현재 암호는 0000이다.
             if(pw === '0000') {
                 document.getElementById('lock').style.display = 'none';
                 document.getElementById('content').style.display = 'flex';
-                // 암호 해제 시 스크롤 가능하도록 설정 변경
+                // 사진들이 많아지면 아래로 스크롤 가능하게 변경
                 document.body.style.alignItems = 'flex-start';
+                document.body.style.overflow = 'auto';
             } else {
                 alert('ACCESS DENIED');
             }
